@@ -3,5 +3,15 @@
 
 int main(int argc, char **argv) {
         FILE *filename;
-        printf("pain\n");
+
+        filename = fopen(argv[1], "r");
+        if (filename != NULL) {
+                printf("Opened!\n");
+        } else {
+                printf("Could not open it\n");
+                exit(-1);
+        }
+
+        fclose(filename);
+        return 0;
 }
