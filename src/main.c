@@ -1,24 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char **argv) {
-        FILE *filename;
+void yuki(FILE *fname) {
         char maracas;
-
-        filename = fopen("yukitest/watdayfuk", "r");
-        if (filename != NULL) {
-                printf("Opened!\n");
-        } else {
-                printf("Could not open it\n");
-                exit(-1);
-        }
-
-        maracas = fgetc(filename);
+        maracas = fgetc(fname);
         do {
-                maracas = fgetc(filename);
                 printf("%c", maracas);
+                maracas = fgetc(fname);
 
         } while (maracas != EOF);
-        fclose(filename);
+}
+
+int main(int argc, char **argv) {
+        FILE *filename;
+        int argnum;
+
+        argnum = argc - (argc - 1);
+
+        while (argnum < argc) {
+                filename = fopen(argv[argnum], "r");
+                if (filename != NULL) {
+                        printf("Opened!\n");
+                } else {
+                        printf("Could not open it\n");
+                        exit(-1);
+                }
+
+                yuki(filename);
+
+                fclose(filename);
+                argnum++;
+        }
         return 0;
 }
