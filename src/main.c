@@ -3,8 +3,9 @@
 
 int main(int argc, char **argv) {
         FILE *filename;
+        char maracas;
 
-        filename = fopen(argv[1], "r");
+        filename = fopen("yukitest/watdayfuk", "r");
         if (filename != NULL) {
                 printf("Opened!\n");
         } else {
@@ -12,6 +13,12 @@ int main(int argc, char **argv) {
                 exit(-1);
         }
 
+        maracas = fgetc(filename);
+        do {
+                maracas = fgetc(filename);
+                printf("%c", maracas);
+
+        } while (maracas != EOF);
         fclose(filename);
         return 0;
 }
